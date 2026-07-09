@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soberano, Não Tirano — O caráter de Deus, da criação à eternidade</title>
+<meta name="description" content="Uma tese sobre a soberania e o caráter de Deus: do Éden à consumação, o fio de ouro da resposta livre ao amor que chama primeiro.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0e1726;
+    --ink-2:#141f33;
+    --ink-3:#1a2740;
+    --parchment:#f2ead6;
+    --text:#d9cfb6;
+    --text-dim:#a89b7c;
+    --gold:#c79a3a;
+    --gold-soft:#e6c877;
+    --wine:#8a3b4d;
+    --wine-soft:#b5637a;
+    --line:rgba(199,154,58,0.22);
+    --shadow:0 30px 80px -40px rgba(0,0,0,0.6);
+    --serif-display:"Fraunces", "Iowan Old Style", serif;
+    --serif-body:"Literata", Georgia, serif;
+    --sans-ui:"Inter", -apple-system, sans-serif;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
+
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--text);
+    font-family:var(--serif-body);
+    font-size:17px;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{ background:var(--gold); color:var(--ink); }
+
+  a{ color:inherit; }
+
+  img,svg{ display:block; max-width:100%; }
+
+  /* ---------- texture ---------- */
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:2; opacity:0.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:fixed; top:0; left:0; right:0; z-index:40;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 28px;
+    background:linear-gradient(to bottom, rgba(14,23,38,0.92), rgba(14,23,38,0));
+    backdrop-filter:blur(2px);
+  }
+  .brand{
+    font-family:var(--sans-ui); font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--text-dim); text-decoration:none; display:flex; gap:9px; align-items:center;
+  }
+  .brand strong{ color:var(--gold-soft); font-weight:600; }
+  .topbar-right{ display:flex; align-items:center; gap:18px; }
+  .chapter-indicator{
+    font-family:var(--sans-ui); font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--text-dim); display:none;
+  }
+  @media(min-width:860px){ .chapter-indicator{ display:inline; } }
+  .menu-btn{
+    background:none; border:1px solid var(--line); color:var(--text);
+    width:38px; height:38px; border-radius:50%; cursor:pointer; display:grid; place-items:center;
+    font-family:var(--sans-ui);
+  }
+  .menu-btn:hover{ border-color:var(--gold); }
+
+  /* mobile nav sheet */
+  .navsheet{
+    position:fixed; inset:0; z-index:50; background:rgba(9,14,23,0.97);
+    display:flex; flex-direction:column; align-items:flex-start; justify-content:center;
+    padding:40px; gap:4px; opacity:0; pointer-events:none; transition:opacity .35s ease;
+  }
+  .navsheet.open{ opacity:1; pointer-events:auto; }
+  .navsheet a{
+    font-family:var(--serif-display); font-size:clamp(22px,5vw,30px); text-decoration:none;
+    color:var(--text); padding:10px 0; display:flex; gap:14px; align-items:baseline; border-bottom:1px solid transparent;
+  }
+  .navsheet a:hover{ color:var(--gold-soft); }
+  .navsheet a .num{ font-size:14px; color:var(--gold); font-family:var(--sans-ui); letter-spacing:0.1em; }
+  .navsheet-close{
+    position:absolute; top:24px; right:24px; background:none; border:1px solid var(--line);
+    color:var(--text); width:40px; height:40px; border-radius:50%; cursor:pointer; font-size:18px;
+  }
+
+  /* ---------- golden thread rail (desktop) ---------- */
+  .rail{
+    position:fixed; left:38px; top:0; bottom:0; width:20px; z-index:20;
+    display:none; align-items:center;
+  }
+  @media(min-width:1180px){ .rail{ display:flex; } }
+  .rail-track{
+    position:relative; width:1px; height:74vh; background:var(--line); margin:0 auto;
+  }
+  .rail-fill{
+    position:absolute; top:0; left:0; width:100%; height:0%;
+    background:linear-gradient(to bottom, var(--gold-soft), var(--gold));
+    box-shadow:0 0 10px 1px rgba(199,154,58,0.5);
+    transition:height .1s linear;
+  }
+  .rail-node{
+    position:absolute; left:50%; transform:translate(-50%,-50%);
+    width:9px; height:9px; border-radius:50%; background:var(--ink-3); border:1px solid var(--line);
+    cursor:pointer; transition:all .25s ease;
+  }
+  .rail-node:hover{ border-color:var(--gold-soft); }
+  .rail-node.active{ background:var(--gold); border-color:var(--gold); box-shadow:0 0 12px 2px rgba(199,154,58,0.6); width:12px; height:12px; }
+  .rail-node .tip{
+    position:absolute; left:20px; top:50%; transform:translateY(-50%);
+    font-family:var(--sans-ui); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--text-dim); white-space:nowrap; opacity:0; pointer-events:none; transition:opacity .2s ease;
+  }
+  .rail-node:hover .tip, .rail-node.active .tip{ opacity:1; color:var(--gold-soft); }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:120px 24px 80px; position:relative; overflow:hidden;
+  }
+  .hero::before{
+    content:""; position:absolute; inset:-20% -10%; z-index:0;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 15%, rgba(199,154,58,0.14), transparent 60%),
+      radial-gradient(ellipse 50% 35% at 80% 80%, rgba(138,59,77,0.12), transparent 60%);
+    pointer-events:none;
+  }
+  .hero-eyebrow{
+    font-family:var(--sans-ui); font-size:12.5px; letter-spacing:0.22em; text-transform:uppercase;
+    color:var(--gold-soft); margin-bottom:26px; position:relative; z-index:1;
+    opacity:0; animation:rise .9s ease .1s forwards;
+  }
+  .hero h1{
+    font-family:var(--serif-display); font-weight:500; font-style:italic;
+    font-size:clamp(44px, 9vw, 108px); line-height:0.98; margin:0 0 30px; color:var(--parchment);
+    max-width:16ch; position:relative; z-index:1;
+    opacity:0; animation:rise 1s ease .25s forwards;
+  }
+  .hero h1 em{ color:var(--gold); font-style:italic; }
+  .hero p{
+    font-family:var(--serif-body); font-style:italic; font-size:clamp(16px,2.4vw,20px);
+    color:var(--text-dim); max-width:46ch; margin:0 auto 46px; position:relative; z-index:1;
+    opacity:0; animation:rise 1s ease .4s forwards;
+  }
+  .hero-cite{ color:var(--text); }
+  .hero-cite::before{ content:"“"; } .hero-cite::after{ content:"”"; }
+  .hero-ref{ display:block; margin-top:10px; font-style:normal; font-family:var(--sans-ui); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-dim); }
+  .scrollcue{
+    position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:10px;
+    font-family:var(--sans-ui); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--text-dim);
+    opacity:0; animation:rise 1s ease .6s forwards;
+  }
+  .scrollcue .wire{ width:1px; height:46px; background:linear-gradient(var(--gold), transparent); position:relative; overflow:hidden; }
+  .scrollcue .wire::after{
+    content:""; position:absolute; top:-40%; left:0; width:100%; height:40%; background:var(--gold-soft);
+    animation:drip 2.2s ease-in-out infinite;
+  }
+  @keyframes drip{ 0%{ top:-40%; } 100%{ top:100%; } }
+  @keyframes rise{ from{ opacity:0; transform:translateY(16px);} to{ opacity:1; transform:translateY(0);} }
+
+  /* ---------- main content ---------- */
+  main{ position:relative; z-index:1; max-width:760px; margin:0 auto; padding:0 26px; }
+  @media(min-width:1180px){ main{ margin-left:calc(50% + 58px); margin-right:auto; max-width:700px; } }
+
+  .chapter{
+    padding:120px 0 60px; border-top:1px solid var(--line);
+    opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s ease;
+  }
+  .chapter.is-visible{ opacity:1; transform:translateY(0); }
+  .chapter:first-of-type{ border-top:none; }
+
+  .chapter-eyebrow{
+    display:flex; align-items:center; gap:14px; margin-bottom:22px;
+    font-family:var(--sans-ui); font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold);
+  }
+  .chapter-eyebrow .roman{
+    font-family:var(--serif-display); font-style:italic; font-size:20px; color:var(--gold-soft); letter-spacing:0;
+  }
+  .chapter-eyebrow .line{ flex:1; height:1px; background:var(--line); }
+
+  .chapter h2{
+    font-family:var(--serif-display); font-weight:500; font-size:clamp(28px,4.2vw,42px);
+    color:var(--parchment); margin:0 0 26px; line-height:1.12; max-width:18ch;
+  }
+
+  .chapter .lede{
+    font-style:italic; font-size:1.12em; color:var(--gold-soft); margin:0 0 22px; line-height:1.55;
+  }
+
+  .chapter p{ margin:0 0 18px; color:var(--text); }
+  .chapter p:last-of-type{ margin-bottom:0; }
+
+  .verses{
+    margin-top:34px; padding-top:24px; border-top:1px dashed var(--line);
+    display:flex; flex-wrap:wrap; gap:10px;
+  }
+  .verse-chip{
+    font-family:var(--sans-ui); font-size:12px; letter-spacing:.04em; color:var(--text-dim);
+    border:1px solid var(--line); border-radius:999px; padding:7px 14px;
+    transition:all .2s ease; cursor:default;
+  }
+  .verse-chip:hover{ border-color:var(--gold); color:var(--gold-soft); }
+
+  .callout{
+    margin:28px 0; padding:22px 24px; background:var(--ink-2); border-left:2px solid var(--gold);
+    border-radius:2px; font-size:0.96em;
+  }
+  .callout .callout-label{ font-family:var(--sans-ui); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-soft); margin-bottom:8px; display:block; }
+
+  /* comparison table (chapter X) */
+  .compare{
+    margin-top:26px; border:1px solid var(--line); border-radius:8px; overflow:hidden;
+  }
+  .compare-row{
+    display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--line);
+  }
+  .compare-row:first-child{ border-top:none; background:var(--ink-3); }
+  .compare-cell{ padding:16px 18px; font-size:0.94em; }
+  .compare-cell + .compare-cell{ border-left:1px solid var(--line); }
+  .compare-row:first-child .compare-cell{
+    font-family:var(--sans-ui); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-soft);
+  }
+
+  /* timeline strip for chapter X corpo místico */
+  .strip{
+    margin-top:30px; display:flex; overflow-x:auto; gap:0; padding-bottom:10px;
+    scrollbar-width:thin;
+  }
+  .strip-item{
+    flex:0 0 auto; width:168px; padding:16px 16px 18px; border-right:1px dashed var(--line);
+    position:relative;
+  }
+  .strip-item:first-child{ padding-left:0; }
+  .strip-item .era{ font-family:var(--sans-ui); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+  .strip-item .desc{ font-size:0.86em; color:var(--text-dim); line-height:1.5; }
+
+  /* ---------- closing / convite ---------- */
+  .finale{
+    padding:130px 0 60px; text-align:left; border-top:1px solid var(--line);
+  }
+  .finale-mark{
+    width:46px; height:46px; border:1px solid var(--gold); border-radius:50%; display:grid; place-items:center;
+    margin-bottom:30px; font-family:var(--serif-display); font-style:italic; color:var(--gold-soft); font-size:20px;
+  }
+  .finale h2{
+    font-family:var(--serif-display); font-style:italic; font-weight:500; color:var(--parchment);
+    font-size:clamp(30px,4.6vw,48px); margin:0 0 22px; line-height:1.15;
+  }
+  .finale p{ color:var(--text); max-width:56ch; margin:0 0 16px; }
+  .finale .hero-ref{ margin:20px 0 40px; }
+
+  .accordion{ border-top:1px solid var(--line); margin-top:10px; }
+  .acc-item{ border-bottom:1px solid var(--line); }
+  .acc-head{
+    width:100%; text-align:left; background:none; border:none; color:var(--parchment);
+    font-family:var(--serif-body); font-size:1.02em; padding:20px 0; cursor:pointer;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+  }
+  .acc-head:hover{ color:var(--gold-soft); }
+  .acc-head .plus{ font-family:var(--sans-ui); font-size:20px; color:var(--gold); transition:transform .3s ease; flex:0 0 auto; }
+  .acc-item.open .plus{ transform:rotate(45deg); }
+  .acc-body{
+    max-height:0; overflow:hidden; transition:max-height .4s ease;
+  }
+  .acc-body-inner{ padding:0 0 22px; color:var(--text-dim); font-size:0.95em; max-width:56ch; }
+
+  .share-row{ display:flex; gap:14px; margin-top:44px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--sans-ui); font-size:12.5px; letter-spacing:.08em; text-transform:uppercase;
+    padding:14px 26px; border-radius:999px; border:1px solid var(--gold); color:var(--ink);
+    background:var(--gold); cursor:pointer; transition:all .2s ease; text-decoration:none; display:inline-block;
+  }
+  .btn:hover{ background:var(--gold-soft); border-color:var(--gold-soft); }
+  .btn.ghost{ background:none; color:var(--text); border-color:var(--line); }
+  .btn.ghost:hover{ border-color:var(--gold); color:var(--gold-soft); }
+
+  footer{
+    padding:50px 26px 90px; text-align:left; max-width:760px; margin:0 auto;
+    font-family:var(--sans-ui); font-size:11.5px; letter-spacing:.04em; color:var(--text-dim);
+  }
+  @media(min-width:1180px){ footer{ margin-left:calc(50% + 58px); margin-right:auto; max-width:700px; } }
+  footer a{ color:var(--gold-soft); text-decoration:none; }
+
+  /* progress bar mobile */
+  .mprogress{ position:fixed; top:0; left:0; height:2px; background:var(--gold); z-index:41; width:0%; transition:width .1s linear; }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="mprogress" id="mprogress"></div>
+
+<header class="topbar">
+  <a href="#top" class="brand">✦ <strong>Soberano, Não Tirano</strong></a>
+  <div class="topbar-right">
+    <span class="chapter-indicator" id="chapterIndicator">Prólogo</span>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir índice">☰</button>
+  </div>
+</header>
+
+<nav class="navsheet" id="navSheet" aria-hidden="true">
+  <button class="navsheet-close" id="navClose" aria-label="Fechar índice">✕</button>
+  <a href="#top"><span class="num">—</span> Início</a>
+  <a href="#cap-1"><span class="num">I</span> Soberania, não tirania</a>
+  <a href="#cap-2"><span class="num">II</span> Mal natural e mal moral</a>
+  <a href="#cap-3"><span class="num">III</span> Romanos 9</a>
+  <a href="#cap-4"><span class="num">IV</span> Jacó e Esaú</a>
+  <a href="#cap-5"><span class="num">V</span> As lágrimas de Esaú</a>
+  <a href="#cap-6"><span class="num">VI</span> Onisciência e eternidade</a>
+  <a href="#cap-7"><span class="num">VII</span> Amor exige escolha</a>
+  <a href="#cap-8"><span class="num">VIII</span> A herança da queda</a>
+  <a href="#cap-9"><span class="num">IX</span> A iniciativa é sempre Dele</a>
+  <a href="#cap-10"><span class="num">X</span> O Noivo e a Noiva</a>
+  <a href="#convite"><span class="num">—</span> O convite</a>
+</nav>
+
+<div class="rail" id="rail">
+  <div class="rail-track">
+    <div class="rail-fill" id="railFill"></div>
+    <!-- nodes positioned via JS -->
+  </div>
+</div>
+
+<div id="top"></div>
+
+<section class="hero">
+  <span class="hero-eyebrow">Uma tese sobre o caráter de Deus</span>
+  <h1>Soberano,<br><em>não tirano.</em></h1>
+  <p><span class="hero-cite">Se somos infiéis, Ele permanece fiel; Ele não pode negar a Si mesmo.</span>
+    <span class="hero-ref">2 Timóteo 2.13</span>
+  </p>
+  <div class="scrollcue">
+    <span>O fio de ouro</span>
+    <div class="wire"></div>
+    <span>da criação à eternidade</span>
+  </div>
+  <div style="position:relative; z-index:1; margin-top:44px; font-family:var(--sans-ui); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-dim); opacity:0; animation:rise 1s ease .75s forwards;">
+    Pr. João Alves &nbsp;·&nbsp; <a href="https://www.radiomateus633.com" target="_blank" rel="noopener" style="color:var(--gold-soft); text-decoration:none;">radiomateus633.com</a>
+  </div>
+</section>
+
+<main>
+
+  <article class="chapter" id="cap-1" data-title="Soberania, não tirania">
+    <div class="chapter-eyebrow"><span class="roman">I.</span><span>Capítulo Um</span><span class="line"></span></div>
+    <h2>Soberania, não tirania</h2>
+    <p class="lede">Deus não é contraditório. Ele é fiel ao Seu próprio caráter.</p>
+    <p>Tirania é poder exercido sem prestar contas à justiça — vontade que se sobrepõe ao bem. Soberania, em Deus, é diferente: é poder que nunca se separa de quem Ele é. Deus não decide arbitrariamente o que é bom, como se pudesse escolher outra coisa amanhã — Ele é o próprio padrão da bondade, e por isso o Seu governo sobre tudo o que existe é motivo de confiança, não de temor servil.</p>
+    <p>Mesmo quando somos infiéis, Ele permanece fiel — não porque Sua fidelidade dependa da nossa resposta, mas porque Ele não pode agir contra a própria natureza. Um Deus assim não pode ser tirano, porque tirania pressupõe justamente a ausência daquilo que compõe o caráter dEle.</p>
+    <div class="verses">
+      <span class="verse-chip">2 Timóteo 2.13</span>
+    </div>
+  </article>
+
+  <article class="chapter" id="cap-2" data-title="Mal natural e mal moral">
+    <div class="chapter-eyebrow"><span class="roman">II.</span><span>Capítulo Dois</span><span class="line"></span></div>
+    <h2>Mal natural e mal moral</h2>
+    <p class="lede">Deus opera dentro da ordem que Ele mesmo estabeleceu. O pecado nasce sempre do coração humano.</p>
+    <p>Há uma distinção necessária entre o mal natural — parte da ordem criacional, sujeita à vontade soberana de Deus — e o mal moral, que nasce exclusivamente da escolha livre da criatura. Deus nunca tenta ninguém para o pecado; cada um é tentado quando arrastado e seduzido pela própria cobiça.</p>
+    <p>Faraó ilustra bem essa distinção. Nos primeiros episódios da narrativa, é ele mesmo quem endurece o próprio coração diante da luz que recebeu, repetidamente, antes de qualquer resposta divina. Só depois de uma sequência de recusas, o texto passa a dizer que foi o Senhor quem o endureceu — um selamento judicial daquilo que Faraó já havia escolhido, não a origem da rejeição.</p>
+    <div class="verses">
+      <span class="verse-chip">Êxodo 8.15, 8.32</span>
+      <span class="verse-chip">Êxodo 9.12</span>
+      <span class="verse-chip">Tiago 1.13-14</span>
+    </div>
+  </article>
+
+  <article class="chapter" id="cap-3" data-title="Romanos 9">
+    <div class="chapter-eyebrow"><span class="roman">III.</span><span>Capítulo Três</span><span class="line"></span></div>
+    <h2>Romanos 9: misericórdia em ação</h2>
+    <p class="lede">A salvação nunca foi uma questão geográfica, mas de arrependimento e fé.</p>
+    <p>Paulo escreve chorando pelos seus compatriotas — sua tristeza é grande, sua angústia é contínua no coração por causa de Israel. O capítulo trata do papel de Israel e dos gentios na história da promessa: quem verdadeiramente herda o que foi prometido não é definido por descendência étnica ou território, mas por fé.</p>
+    <p>O próprio Paulo conclui: os gentios, que nem buscavam a justiça, alcançaram-na pela fé; Israel, perseguindo a lei da justiça, não a atingiu, porque a buscou pelas obras, e não pela fé. É a própria estrutura do argumento de Paulo que aponta para a resposta humana — fé ou obras — como o que distingue quem alcança e quem tropeça.</p>
+    <div class="verses">
+      <span class="verse-chip">Romanos 9.1-3</span>
+      <span class="verse-chip">Romanos 9.6-8</span>
+      <span class="verse-chip">Romanos 9.30-32</span>
+    </div>
+  </article>
+
+  <article class="chapter" id="cap-4" data-title="Jacó e Esaú">
+    <div class="chapter-eyebrow"><span class="roman">IV.</span><span>Capítulo Quatro</span><span class="line"></span></div>
+    <h2>Jacó e Esaú: homem e nação</h2>
+    <p class="lede">A profecia não se cumpriu entre os dois irmãos — cumpriu-se entre as nações que deles nasceram.</p>
+    <p>No relato de Gênesis, quando os irmãos se reencontram após anos separados, é Jacó quem se curva sete vezes diante de Esaú e o chama repetidamente de senhor, apresentando-se como servo. Não há nenhum registro de Esaú servindo Jacó em vida — ao contrário, Esaú aparece como o mais forte dos dois.</p>
+    <p>A palavra dada antes do nascimento — "o maior servirá o menor" — só se cumpre séculos depois, no plano das nações: Edom, descendência de Esaú, subjugado por Israel sob o reinado de Davi. A profecia é corporativa; a vida real dos dois homens conta uma história distinta, quase inversa.</p>
+    <div class="verses">
+      <span class="verse-chip">Gênesis 25.23</span>
+      <span class="verse-chip">Gênesis 33.3-15</span>
+      <span class="verse-chip">2 Samuel 8.14</span>
+    </div>
+  </article>
+
+  <article class="chapter" id="cap-5" data-title="As lágrimas de Esaú">
+    <div class="chapter-eyebrow"><span class="roman">V.</span><span>Capítulo Cinco</span><span class="line"></span></div>
+    <h2>As lágrimas de Esaú</h2>
+    <p class="lede">Ele chorou por bênção perdida — não por pecado reconhecido.</p>
+    <p>O texto de Gênesis é específico sobre o que Esaú buscava com lágrimas: três vezes ele pede a bênção de volta, numa lógica de herança e patrimônio perdido. Não há confissão, não há reconhecimento do próprio erro em ter desprezado o direito de primogenitura anos antes — só o clamor pelo que fora tomado.</p>
+    <div class="callout">
+      <span class="callout-label">A distinção</span>
+      Hebreus registra que Esaú buscou a bênção com lágrimas, mas não achou lugar para arrependimento — mudança de mente e direção. É a mesma diferença que Paulo traça entre a tristeza segundo Deus, que opera arrependimento para a salvação, e a tristeza do mundo, que opera morte: uma lamenta a perda; a outra reconhece o erro.
+    </div>
+    <p>Se Esaú é reprovado, não é por um decreto anterior ao seu nascimento, mas por um padrão de vida real e datado — o desprezo pela primogenitura, seguido de lágrimas por consequência, sem indício de contrição moral.</p>
+    <div class="verses">
+      <span class="verse-chip">Gênesis 25.34</span>
+      <span class="verse-chip">Gênesis 27.34-38</span>
+      <span class="verse-chip">Hebreus 12.16-17</span>
+      <span class="verse-chip">2 Coríntios 7.10</span>
+    </div>
+  </article>
+
+  <article class="chapter" id="cap-6" data-title="Onisciência e eternidade">
+    <div class="chapter-eyebrow"><span class="roman">VI.</span><span>Capítulo Seis</span><span class="line"></span></div>
+    <h2>Onisciência e eternidade</h2>
+    <p class="lede">Deus anuncia o fim desde o princípio. Conhecer não é o mesmo que causar.</p>
+    <p>É justamente a capacidade de anunciar o que ainda vai acontecer que distingue Deus dos ídolos, segundo o profeta Isaías. Mas onisciência plena não exige determinismo. Deus não está dentro do tempo, vendo o futuro se aproximar como nós — Ele contempla toda a história, passado, presente e futuro, de um único e eterno agora.</p>
+    <p>Por isso Ele conhece a escolha genuinamente livre de cada pessoa sem precisar decretá-la à força. O conhecimento divino não é sequencial como o nosso: Deus não sabe "antes" no sentido cronológico — Ele conhece cada instante do tempo humano a partir de fora dele.</p>
+    <div class="verses">
+      <span class="verse-chip">Isaías 41.22-23</span>
+      <span class="verse-chip">Isaías 42.9</span>
+      <span class="verse-chip">Isaías 46.9-10</span>
+    </div>
+  </article>
+
+  <article class="chapter" id="cap-7" data-title="Amor exige escolha">
+    <div class="chapter-eyebrow"><span class="roman">VII.</span><span>Capítulo Sete</span><span class="line"></span></div>
+    <h2>Amor exige escolha</h2>
+    <p class="lede">Deus criou para relacionamento — e amor sem escolha não é amor.</p>
+    <p>Se o propósito da criação humana é um relacionamento genuíno com Deus, e relacionamento genuíno pressupõe reciprocidade real, então a possibilidade de recusa não é uma falha no projeto — é o preço necessário para que a aceitação tenha algum valor. Um "amor" que só pudesse acontecer porque foi decretado deixaria de ser amor no sentido pleno.</p>
+    <p>É por isso que o apelo bíblico "escolhe, pois, a vida" só faz sentido pleno como convite genuíno se a escolha, de fato, for real.</p>
+    <div class="verses">
+      <span class="verse-chip">Deuteronômio 30.19</span>
+    </div>
+  </article>
+
+  <article class="chapter" id="cap-8" data-title="A herança da queda">
+    <div class="chapter-eyebrow"><span class="roman">VIII.</span><span>Capítulo Oito</span><span class="line"></span></div>
+    <h2>A herança da queda</h2>
+    <p class="lede">O primeiro casal foi criado bom. A partir da queda, herdamos uma inclinação para o pecado.</p>
+    <p>Adão e Eva foram formados muito bons, inclinados ao bem — e pecaram por uma escolha real, livre e histórica, movida por comparação: "sereis como Deus". A partir desse momento, a humanidade inteira herda uma condição já viciada, não uma folha em branco reconstruída do zero por cada indivíduo.</p>
+    <div class="callout">
+      <span class="callout-label">Extensão e intensidade</span>
+      Essa inclinação atinge toda a extensão do nosso ser — corpo, alma e espírito — mas não com a mesma intensidade destrutiva em cada área. A prova está no próprio relato: depois da queda, Adão e Eva ainda ouvem a voz de Deus, ainda respondem com linguagem racional, ainda sentem vergonha moral genuína. A imagem foi ferida, profundamente — mas não apagada.
+    </div>
+    <p>Comparação e orgulho continuam sendo o motor recorrente da escolha moral distorcida — de Caim a Tiago 4 — mas esse padrão é uma construção ativa, repetida a cada escolha, sobre uma base herdada, não neutra.</p>
+    <div class="verses">
+      <span class="verse-chip">Gênesis 1.31</span>
+      <span class="verse-chip">Gênesis 3.9-12</span>
+      <span class="verse-chip">Romanos 5.12</span>
+      <span class="verse-chip">Salmos 51.5</span>
+      <span class="verse-chip">Tiago 4.1-2</span>
+    </div>
+  </article>
+
+  <article class="chapter" id="cap-9" data-title="A iniciativa é sempre Dele">
+    <div class="chapter-eyebrow"><span class="roman">IX.</span><span>Capítulo Nove</span><span class="line"></span></div>
+    <h2>A iniciativa é sempre Dele</h2>
+    <p class="lede">"Onde estás?" — a primeira pergunta depois da queda veio de Deus, não do homem.</p>
+    <p>Toda capacidade humana de responder ao chamado divino só existe porque Deus, em graça, religa primeiro — antes que qualquer criatura O procure. Não foi Adão quem buscou a Deus escondido entre as árvores; foi Deus quem foi atrás de Adão.</p>
+    <p>É essa graça que vai adiante — <em>previniente</em>, a que chega antes — que restaura, em cada pessoa, a capacidade ferida de responder livremente. Ninguém vem, a não ser que o Pai, primeiro, o traga.</p>
+    <div class="verses">
+      <span class="verse-chip">Gênesis 3.9</span>
+      <span class="verse-chip">João 6.44</span>
+    </div>
+  </article>
+
+  <article class="chapter" id="cap-10" data-title="O Noivo e a Noiva">
+    <div class="chapter-eyebrow"><span class="roman">X.</span><span>Capítulo Dez</span><span class="line"></span></div>
+    <h2>O Noivo e a Noiva</h2>
+    <p class="lede">Eleitos antes da fundação do mundo — um individualmente, a outra em corpo.</p>
+    <p>Cristo é o único eleito de forma individual — o Servo escolhido por Deus. A Igreja, o corpo místico, é eleita de forma corporativa: todo aquele que se associa a Cristo pela fé passa a fazer parte dela. É uma eleição em Cristo, não paralela a Ele.</p>
+    <p>Esse corpo místico se revela ao longo de toda a história da redenção — não como uma instituição só, mas como a totalidade dos que pertencem a Cristo em cada era:</p>
+
+    <div class="strip">
+      <div class="strip-item">
+        <div class="era">Éden</div>
+        <div class="desc">Adão e Eva, alcançados pela promessa depois da queda.</div>
+      </div>
+      <div class="strip-item">
+        <div class="era">Antigo Testamento</div>
+        <div class="desc">Os salvos pela esperança do Messias ainda por vir.</div>
+      </div>
+      <div class="strip-item">
+        <div class="era">Atos 2 em diante</div>
+        <div class="desc">A igreja visível, que conhece o Messias já revelado.</div>
+      </div>
+      <div class="strip-item">
+        <div class="era">Tribulação</div>
+        <div class="desc">Os salvos no período que sucede o arrebatamento.</div>
+      </div>
+      <div class="strip-item">
+        <div class="era">Milênio</div>
+        <div class="desc">Os salvos do reinado visível de Cristo na terra.</div>
+      </div>
+      <div class="strip-item" style="border-right:none;">
+        <div class="era">Trono Branco</div>
+        <div class="desc">Todos inscritos, desde a fundação do mundo, num só Livro da Vida.</div>
+      </div>
+    </div>
+
+    <p style="margin-top:30px;">A igreja visível — de Atos 2 até o arrebatamento — é a manifestação histórica e temporária desse corpo maior e eterno, não o corpo místico em sua totalidade.</p>
+
+    <div class="compare">
+      <div class="compare-row">
+        <div class="compare-cell">Corpo místico</div>
+        <div class="compare-cell">Igreja visível</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">A noiva eleita corporativamente, de todas as eras.</div>
+        <div class="compare-cell">A manifestação histórica e organizada, de Atos 2 ao arrebatamento.</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Inclui Adão e Eva, os santos do AT, a igreja, os salvos da tribulação e do milênio.</div>
+        <div class="compare-cell">Inclui os que creem entre o Pentecostes e o arrebatamento.</div>
+      </div>
+    </div>
+
+    <p style="margin-top:30px;">Tudo caminha para uma consumação: o Cordeiro e a noiva que já se preparou — não por imposição, mas por resposta genuína ao amor que a buscou primeiro.</p>
+    <div class="verses">
+      <span class="verse-chip">Efésios 1.4</span>
+      <span class="verse-chip">Efésios 5.25-27</span>
+      <span class="verse-chip">Apocalipse 19.7-9</span>
+      <span class="verse-chip">Apocalipse 21.2</span>
+      <span class="verse-chip">Apocalipse 20.11-15</span>
+      <span class="verse-chip">Apocalipse 13.8</span>
+    </div>
+  </article>
+
+  <section class="finale" id="convite">
+    <div class="finale-mark">✦</div>
+    <h2>O convite continua aberto.</h2>
+    <p>Do Éden até a consumação final, o mesmo fio percorre a história: Deus toma a iniciativa, e o homem é convidado a responder — genuinamente, sem coação, porque só assim a resposta tem o peso de um relacionamento real.</p>
+    <p class="hero-cite" style="font-style:italic; color:var(--gold-soft);">
+      "E o Espírito e a noiva dizem: Vem. [...] E quem quiser, tome de graça da água da vida."
+      <span class="hero-ref" style="color:var(--text-dim);">Apocalipse 22.17</span>
+    </p>
+
+    <div class="accordion" id="accordion">
+      <div class="acc-item">
+        <button class="acc-head"><span>O que significa responder a esse convite?</span><span class="plus">+</span></button>
+        <div class="acc-body"><div class="acc-body-inner">Reconhecer que a inclinação para o pecado é real em cada um de nós, e que Deus, em Cristo, tomou a iniciativa de nos buscar antes que O procurássemos. Responder é aceitar, em fé, o que Ele já ofereceu.</div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head"><span>Isso exige alguma fórmula ou ritual específico?</span><span class="plus">+</span></button>
+        <div class="acc-body"><div class="acc-body-inner">Não. É uma resposta do coração — arrependimento genuíno, não apenas tristeza por consequências, e fé de que Cristo é quem Ele diz ser. Uma conversa simples, honesta, com Deus, é o começo.</div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head"><span>E depois — como seguir crescendo nessa resposta?</span><span class="plus">+</span></button>
+        <div class="acc-body"><div class="acc-body-inner">Buscando uma comunidade local que ensine as Escrituras com seriedade, lendo os Evangelhos para conhecer a pessoa de Cristo, e mantendo o mesmo padrão deste texto: iniciativa de Deus, resposta genuína da sua parte.</div></div>
+      </div>
+    </div>
+
+    <div class="share-row">
+      <button class="btn" id="shareBtn">Compartilhar esta página</button>
+      <a class="btn ghost" href="#top">Voltar ao início</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div>✦ Soberano, não Tirano — uma síntese teológica para uso em evangelização.</div>
+  <div style="margin-top:8px;">Referências bíblicas conforme o texto sagrado; comentário e estrutura de autoria própria.</div>
+  <div style="margin-top:18px; padding-top:18px; border-top:1px solid var(--line); color:var(--text);">
+    Pr. João Alves — <a href="https://www.radiomateus633.com" target="_blank" rel="noopener">www.radiomateus633.com</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var chapters = Array.from(document.querySelectorAll('.chapter'));
+  var railTrack = document.querySelector('.rail-track');
+  var railFill = document.getElementById('railFill');
+  var chapterIndicator = document.getElementById('chapterIndicator');
+  var mprogress = document.getElementById('mprogress');
+
+  // build rail nodes
+  var nodes = [];
+  if(railTrack){
+    chapters.forEach(function(ch, i){
+      var node = document.createElement('div');
+      node.className = 'rail-node';
+      node.style.top = ((i) / (chapters.length - 1) * 100) + '%';
+      var tip = document.createElement('span');
+      tip.className = 'tip';
+      tip.textContent = (i+1) + '. ' + ch.getAttribute('data-title');
+      node.appendChild(tip);
+      node.addEventListener('click', function(){
+        ch.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+      railTrack.appendChild(node);
+      nodes.push(node);
+    });
+  }
+
+  // reveal on scroll
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+      }
+    });
+  }, {threshold:0.12});
+  chapters.forEach(function(ch){ io.observe(ch); });
+
+  // active chapter tracking
+  var activeIdx = -1;
+  function updateActive(){
+    var scrollY = window.scrollY || window.pageYOffset;
+    var vh = window.innerHeight;
+    var docH = document.documentElement.scrollHeight - vh;
+    var pct = docH > 0 ? Math.min(100, Math.max(0, (scrollY / docH) * 100)) : 0;
+
+    if(railFill) railFill.style.height = pct + '%';
+    if(mprogress) mprogress.style.width = pct + '%';
+
+    var idx = -1;
+    chapters.forEach(function(ch, i){
+      var rect = ch.getBoundingClientRect();
+      if(rect.top < vh * 0.5){ idx = i; }
+    });
+    if(idx !== activeIdx){
+      activeIdx = idx;
+      nodes.forEach(function(n, i){ n.classList.toggle('active', i === idx); });
+      if(chapterIndicator){
+        chapterIndicator.textContent = idx >= 0
+          ? ('Cap. ' + toRoman(idx+1) + ' — ' + chapters[idx].getAttribute('data-title'))
+          : 'Prólogo';
+      }
+    }
+  }
+  function toRoman(n){
+    var vals=[10,9,5,4,1], syms=['X','IX','V','IV','I'], out='';
+    while(n>0){ for(var i=0;i<vals.length;i++){ while(n>=vals[i]){ out+=syms[i]; n-=vals[i]; } } }
+    return out;
+  }
+  document.addEventListener('scroll', updateActive, {passive:true});
+  window.addEventListener('resize', updateActive);
+  updateActive();
+
+  // mobile nav
+  var menuBtn = document.getElementById('menuBtn');
+  var navSheet = document.getElementById('navSheet');
+  var navClose = document.getElementById('navClose');
+  function openNav(){ navSheet.classList.add('open'); navSheet.setAttribute('aria-hidden','false'); }
+  function closeNav(){ navSheet.classList.remove('open'); navSheet.setAttribute('aria-hidden','true'); }
+  menuBtn.addEventListener('click', openNav);
+  navClose.addEventListener('click', closeNav);
+  navSheet.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeNav); });
+
+  // accordion
+  document.querySelectorAll('.acc-item').forEach(function(item){
+    var head = item.querySelector('.acc-head');
+    var body = item.querySelector('.acc-body');
+    head.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.acc-item.open').forEach(function(other){
+        if(other !== item){
+          other.classList.remove('open');
+          other.querySelector('.acc-body').style.maxHeight = null;
+        }
+      });
+      if(isOpen){
+        item.classList.remove('open');
+        body.style.maxHeight = null;
+      } else {
+        item.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // share
+  var shareBtn = document.getElementById('shareBtn');
+  shareBtn.addEventListener('click', function(){
+    var url = window.location.href;
+    if(navigator.share){
+      navigator.share({ title: document.title, url: url }).catch(function(){});
+    } else if(navigator.clipboard){
+      navigator.clipboard.writeText(url).then(function(){
+        shareBtn.textContent = 'Link copiado!';
+        setTimeout(function(){ shareBtn.textContent = 'Compartilhar esta página'; }, 1800);
+      });
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
